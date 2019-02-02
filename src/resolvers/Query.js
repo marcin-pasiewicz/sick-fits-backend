@@ -5,6 +5,7 @@ const Query = {
     item: forwardTo('db'),
     itemsConnection: forwardTo('db'),
     me(parent, args, ctx, info) {
+        console.log(ctx)
         if (!ctx.request.userId) {
             return null;
         }
