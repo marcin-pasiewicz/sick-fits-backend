@@ -55,7 +55,7 @@ const Mutations = {
         });
         return user;
     },
-    async signin(parent, {email, password}, ctx, info) {
+    async signin(parent, {email, password}, ctx) {
         const user = await ctx.db.query.user({where: {email}});
         if (!user) {
             throw new Error(`No such user found for email ${email}`);
@@ -71,6 +71,11 @@ const Mutations = {
         });
         return user;
     },
+    signout(parent, args, ctx) {
+        ctx.response.clearCookie('token');
+
+        return {message: 'Goodbye'}
+    }
 };
 
 module.exports = Mutations;
